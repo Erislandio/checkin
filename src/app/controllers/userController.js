@@ -114,13 +114,11 @@ module.exports = {
         number
       };
 
-      User.findOneAndUpdate({ email, address }).then(() => {
-
+      User.findOneAndUpdate({ email, address }).then(async () => {
         const newUser = await User.findOne({ email });
 
         return res.status(201).json(newUser);
-      })
-
+      });
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -129,12 +127,11 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      User.findOneAndUpdate({ email, symptom: true }).then(() => {
+      User.findOneAndUpdate({ email, symptom: true }).then(async () => {
         const newUser = await User.findOne({ email });
 
         return res.status(201).json(newUser);
-      })
-
+      });
     } catch (error) {
       return res.status(500).json(error);
     }
