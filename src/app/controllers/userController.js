@@ -104,15 +104,6 @@ module.exports = {
         number
       } = req.body;
 
-      const user = await User.findOne({ email }).select("-password");
-
-      if (!user) {
-        return res.json({
-          error: true,
-          message: "Usuário já cadastrado"
-        });
-      }
-
       const address = {
         postalCode,
         logradouro,
@@ -123,10 +114,12 @@ module.exports = {
         number
       };
 
-      user.address = address;
+      const user = await User.findOneAndUpdate({ email, address });
       await user.save();
 
-      return res.json(user);
+      const newUser = await User.findOne({ email });
+
+      return res.status(201).json(newUser);
     } catch (error) {
       return res.status(500).json(error);
     }
@@ -135,21 +128,12 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      const user = await User.findOne({ email }).select("-password");
-
-      if (!user) {
-        return res.json({
-          error: true,
-          message: "Usuário não encontrado"
-        });
-      }
-
-      console.log(user);
-
-      user.symptom = true;
+      const user = await User.findOneAndUpdate({ email, symptom: true });
       await user.save();
 
-      return res.status(201).json(user);
+      const newUser = await User.findOne({ email });
+
+      return res.status(201).json(newUser);
     } catch (error) {
       return res.status(500).json(error);
     }
