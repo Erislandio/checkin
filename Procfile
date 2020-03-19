@@ -1,1 +1,1 @@
-yarn dev
+node ./src/server.js
