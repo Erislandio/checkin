@@ -133,7 +133,7 @@ module.exports = {
   },
   async changeSymptom(req, res) {
     try {
-      const { email, symptom } = req.body;
+      const { email } = req.body;
 
       const user = User.findOne({ email });
 
@@ -144,7 +144,7 @@ module.exports = {
         });
       }
 
-      user.symptom = symptom;
+      user.symptom = true;
       await user.save();
 
       return res.status(201).send(user);
