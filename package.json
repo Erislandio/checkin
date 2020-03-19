@@ -13,7 +13,8 @@
     "mongoose": "^5.9.5"
   },
   "scripts": {
-    "dev": "yarn nodemon ./src/server.js"
+    "dev": "yarn nodemon ./src/server.js",
+    "start": "node ./src/server.js"
   },
   "devDependencies": {
     "devmon": "^0.0.1",
