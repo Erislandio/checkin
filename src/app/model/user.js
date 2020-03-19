@@ -27,6 +27,10 @@ const UserSchema = new Schema(
       type: PointSchema,
       index: "2dsphere"
     },
+    symptom: {
+      type: Boolean,
+      default: false
+    },
     address: {
       type: Address
     }

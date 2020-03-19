@@ -61,7 +61,8 @@ module.exports = {
             },
             $maxDistance: 10000
           }
-        }
+        },
+        symptom: true
       }).select("-password");
 
       return res.json({ users });
@@ -126,6 +127,27 @@ module.exports = {
       await user.save();
 
       return res.json(user);
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
+  async changeSymptom(req, res) {
+    try {
+      const { email, symptom } = req.body;
+
+      const user = User.findOne({ email });
+
+      if (!user) {
+        return res.json({
+          error: true,
+          message: "Usuário não encontrado"
+        });
+      }
+
+      user.symptom = symptom;
+      await user.save();
+
+      return res.status(201).send(user);
     } catch (error) {
       return res.status(500).json(error);
     }
