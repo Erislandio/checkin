@@ -1,5 +1,5 @@
 const { Schema, model } = require("mongoose");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const Address = require("./address");
 const PointSchema = require("./utils/pointSchema");
 

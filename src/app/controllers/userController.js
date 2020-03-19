@@ -104,7 +104,7 @@ module.exports = {
         number
       } = req.body;
 
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).select("-password");
 
       if (!user) {
         return res.json({
@@ -135,7 +135,7 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      const user = await User.findOne({ email });
+      const user = await User.findOne({ email }).select("-password");
 
       if (!user) {
         return res.json({
@@ -144,7 +144,7 @@ module.exports = {
         });
       }
 
-      console.log(user)
+      console.log(user);
 
       user.symptom = true;
       await user.save();
