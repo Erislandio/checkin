@@ -135,7 +135,7 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      const user = User.findOne({ email });
+      const user = await User.findOne({ email });
 
       if (!user) {
         return res.json({
@@ -144,10 +144,12 @@ module.exports = {
         });
       }
 
+      console.log(user)
+
       user.symptom = true;
       await user.save();
 
-      return res.status(201).send(user);
+      return res.status(201).json(user);
     } catch (error) {
       return res.status(500).json(error);
     }
