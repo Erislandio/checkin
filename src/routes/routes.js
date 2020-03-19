@@ -15,6 +15,7 @@ routes.post("/login", authController.login);
 routes.post("/user", useController.store);
 routes.post("/search", authMiddleware, useController.searchUserByLocation);
 routes.get("/user", authMiddleware, useController.index);
+routes.patch("/user", authMiddleware, useController.changeSymptom);
 routes.delete("/user", authMiddleware, useController.delete);
 routes.patch("/address", authMiddleware, useController.editAddress);
 
