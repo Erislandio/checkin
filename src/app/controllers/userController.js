@@ -114,7 +114,7 @@ module.exports = {
         number
       };
 
-      User.findOneAndUpdate({ email, address }).then(async () => {
+      User.findOneAndUpdate({ email }, { address }).then(async () => {
         const newUser = await User.findOne({ email });
 
         return res.status(201).json(newUser);
@@ -127,7 +127,7 @@ module.exports = {
     try {
       const { email } = req.body;
 
-      User.findOneAndUpdate({ email, symptom: true }).then(async () => {
+      User.findOneAndUpdate({ email }, { symptom: true }).then(async () => {
         const newUser = await User.findOne({ email });
 
         return res.status(201).json(newUser);
